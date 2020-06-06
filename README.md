@@ -20,7 +20,7 @@
 
 9) Prevent the user from reaching the Foods page when not logged in
 
-10) Add some data for one of your users to the Realtime Database, based on the data in store-foods.js
+✔ 10) Add some data for one of your users to the Realtime Database, based on the data in store-foods.js
 
 11) Add the ability to read the current user's food data from Firebase and display it within the app - whenever a food item is added, updated or deleted within Firebase
 
