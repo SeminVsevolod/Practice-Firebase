@@ -2,7 +2,7 @@
 
 # Exercise 4. Practice Firebase
 
-1) Create a new Firebase project called "Foods" and enable Email / Password authentication within Firebase
+✔ 1) Create a new Firebase project called "Foods" and enable Email / Password authentication within Firebase
 2) Add the Firebase package to the project and create a boot file which makes the auth and database API's available within your app. Hint: you'll need to register a web app on Firebase
 3) Create an auth Vuex store file with empty state, mutations, actions & getters objects and import the Firebase Auth API
 4) Add the ability to register a user
