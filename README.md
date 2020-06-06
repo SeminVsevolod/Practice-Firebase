@@ -12,7 +12,7 @@
 
 ✔ 5) Add the ability to login a user
 
-6) Hide the Login button when the user is logged in
+✔ 6) Hide the Login button when the user is logged in
 
 7) Add a Logout button which only displays when the user is logged in. Log the user out when this is clicked
 
