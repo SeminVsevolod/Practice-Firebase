@@ -28,7 +28,7 @@
 
 ✔ 13) Ensure that multiple users can log in and log out without seeing another user's data in the app
 
-14) Add database rules to Firebase to ensure that each user can only read or write to their own data
+✔ 14) Add database rules to Firebase to ensure that each user can only read or write to their own data
 
 ✔ 15) Display a nice error notification whenever there is an auth or database error
 
