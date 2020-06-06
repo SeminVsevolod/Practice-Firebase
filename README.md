@@ -22,7 +22,7 @@
 
 ✔ 10) Add some data for one of your users to the Realtime Database, based on the data in store-foods.js
 
-11) Add the ability to read the current user's food data from Firebase and display it within the app - whenever a food item is added, updated or deleted within Firebase
+✔ 11) Add the ability to read the current user's food data from Firebase and display it within the app - whenever a food item is added, updated or deleted within Firebase
 
 12) Add the ability to write data to Firebase whenever a food item is added, updated or deleted within the app
 
