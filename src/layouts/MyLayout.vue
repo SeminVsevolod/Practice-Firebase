@@ -49,7 +49,7 @@
             <q-icon name="account_circle" />
           </q-item-section>
           <q-item-section>
-            <q-item-label >Logout</q-item-label>
+            <q-item-label >Logout {{ userEmail }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     ...mapState('auth', [
-      'loggedIn',
+      'loggedIn', 'userEmail'
     ]),
   },
   methods: {

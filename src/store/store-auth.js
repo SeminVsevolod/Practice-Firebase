@@ -4,12 +4,15 @@ import { showErrorMessage } from 'src/functions/function-show-error-message';
 
 const $state = {
   loggedIn: false,
+  userEmail: ''
 };
 
 const $mutations = {
   setLoggedIn(state, value) {
     state.loggedIn = value;
-    console.log('setLoggedIn->', state.loggedIn);
+  },
+  setUserEmail(state, value) {
+    state.userEmail = value;
   },
 };
 
@@ -19,7 +22,6 @@ const $actions = {
     firebaseAuth.createUserWithEmailAndPassword(payload.email, payload.password)
       .then((response) => {
         Loading.hide();
-        console.log('response', response, commit);
       })
       .catch((error) => {
         showErrorMessage(error.message);
@@ -29,7 +31,6 @@ const $actions = {
     Loading.show();
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
       .then((response) => {
-        console.log('response', response, commit);
         Loading.hide();
       })
       .catch((error) => {
@@ -42,9 +43,11 @@ const $actions = {
   handleAuthStateChange({ commit, dispatch }) {
     firebaseAuth.onAuthStateChanged((user) => {
       Loading.hide();
-      console.log('user ->',user);
       if (user) {
         commit('setLoggedIn', true);
+        if (user.email) {
+          commit('setUserEmail', user.email);
+        }
         LocalStorage.set('loggedIn', true);
         this.$router.push('/').catch(() => {});
         dispatch('foods/fbReadData', null, { root: true });
