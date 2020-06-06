@@ -18,7 +18,7 @@
 
 ✔ 8) Redirect the user to appropriate pages when they log in or log out
 
-9) Prevent the user from reaching the Foods page when not logged in
+✔ 9) Prevent the user from reaching the Foods page when not logged in
 
 ✔ 10) Add some data for one of your users to the Realtime Database, based on the data in store-foods.js
 
