@@ -6,11 +6,11 @@
 
 ✔ 2) Add the Firebase package to the project and create a boot file which makes the auth and database API's available within your app. Hint: you'll need to register a web app on Firebase
 
-3) Create an auth Vuex store file with empty state, mutations, actions & getters objects and import the Firebase Auth API
+✔ 3) Create an auth Vuex store file with empty state, mutations, actions & getters objects and import the Firebase Auth API
 
-4) Add the ability to register a user
+✔ 4) Add the ability to register a user
 
-5) Add the ability to login a user
+✔ 5) Add the ability to login a user
 
 6) Hide the Login button when the user is logged in
 

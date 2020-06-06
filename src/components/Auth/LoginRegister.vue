@@ -35,8 +35,8 @@
 		</div>
 		<div class="row">
 			<q-space />
-			<q-btn 
-				color="primary" 
+			<q-btn
+				color="primary"
 				type="submit">
 				{{ tab | capitalize }}
 			</q-btn>
@@ -45,8 +45,17 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
 	export default {
-		props: ['tab'],
+    props: {
+      tab: {
+        type: String,
+        default: 'login',
+        validator(value) {
+          return ['login', 'register'].includes(value);
+        },
+      },
+    },
 		data() {
 			return {
 				formData: {
@@ -56,19 +65,37 @@
 			}
 		},
 		methods: {
-			isValidEmailAddress(email) {
-				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-				    return re.test(String(email).toLowerCase());
-			},
+      ...mapActions('auth', [
+        'registerUser',
+        'loginUser',
+      ]),
+
+      /**
+       * Is valid email
+       * (source -> see link below, +include upper case until @)
+       * @link https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression#answer-201378
+       * @param field
+       * @returns {boolean}
+       */
+      isValidEmailAddress(field) {
+        if (field) {
+          // eslint-disable-next-line no-control-regex
+          return /^(?:[a-zA-Z0-9!#$%&'*+/=?^_{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z](?:[a-z]*[a-z])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/.test(`${field}`);
+        }
+        return true;
+      },
+
 			submitForm() {
-				this.$refs.email.validate()
-				this.$refs.password.validate()
+				this.$refs.email.validate();
+				this.$refs.password.validate();
 				if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-					if (this.tab == 'login') {
+					if (this.tab === 'login') {
 						// login the user here
+            this.loginUser(this.formData);
 					}
 					else {
 						// register the user here
+            this.registerUser(this.formData);
 					}
 				}
 			}
