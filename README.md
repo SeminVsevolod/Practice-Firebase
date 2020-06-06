@@ -14,7 +14,7 @@
 
 ✔ 6) Hide the Login button when the user is logged in
 
-7) Add a Logout button which only displays when the user is logged in. Log the user out when this is clicked
+✔ 7) Add a Logout button which only displays when the user is logged in. Log the user out when this is clicked
 
 8) Redirect the user to appropriate pages when they log in or log out
 
