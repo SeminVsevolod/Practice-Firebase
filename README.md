@@ -16,7 +16,7 @@
 
 ✔ 7) Add a Logout button which only displays when the user is logged in. Log the user out when this is clicked
 
-8) Redirect the user to appropriate pages when they log in or log out
+✔ 8) Redirect the user to appropriate pages when they log in or log out
 
 9) Prevent the user from reaching the Foods page when not logged in
 
