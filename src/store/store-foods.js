@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import {uid} from 'quasar';
+import { uid, Notify } from 'quasar';
 import { firebaseDb, firebaseAuth } from 'boot/firebase';
+import { showErrorMessage } from 'src/functions/function-show-error-message';
 
 const state = {
   foods: {
@@ -45,19 +46,19 @@ const mutations = {
 };
 
 const actions = {
-  deleteFood({commit}, id) {
-    commit('deleteFood', id);
+  deleteFood({dispatch}, id) {
+    dispatch('fbDeleteFood', id);
   },
-  addFood({commit}, food) {
+  addFood({dispatch}, food) {
     let newId = uid();
     let payload = {
       id: newId,
       food: food
     };
-    commit('addFood', payload);
+    dispatch('fbAddFood', payload);
   },
-  updateFood({commit}, payload) {
-    commit('updateFood', payload);
+  updateFood({dispatch}, payload) {
+    dispatch('fbUpdateFood', payload);
   },
 
   fbReadData({ commit }) {
@@ -67,7 +68,7 @@ const actions = {
     userFoods.once('value', () => {
       commit('setFoodsDownloaded', true);
     }, (error) => {
-      //showErrorMessage(error && error.message ? error.message : 'Error: foods cannot be shown');
+      showErrorMessage(error && error.message ? error.message : 'Foods cannot be shown');
       this.$router.replace('/auth');
     });
 
@@ -95,6 +96,41 @@ const actions = {
     userFoods.on('child_removed', (snapshot) => {
       const foodId = snapshot.key;
       commit('deleteFood', foodId);
+    });
+  },
+
+  fbAddFood({}, payload) {
+    const foodRef = firebaseDb.ref(`foods/${firebaseAuth.currentUser.uid}/${payload.id}`);
+    foodRef.set(payload.food)
+    .then(() => {
+      Notify.create({ message: 'Food added' });
+    })
+    .catch((error) => {
+      showErrorMessage(error && error.message ? error.message : 'Food cannot be added');
+    });
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  fbUpdateFood({}, payload) {
+    const foodRef = firebaseDb.ref(`foods/${firebaseAuth.currentUser.uid}/${payload.id}`);
+    foodRef.update(payload.updates)
+    .then(() => {
+      Notify.create({ message: 'Food updated' });
+    })
+    .catch((error) => {
+      showErrorMessage(error && error.message ? error.message : 'Food cannot be updated');
+    });
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  fbDeleteFood({}, foodId) {
+    const foodRef = firebaseDb.ref(`foods/${firebaseAuth.currentUser.uid}/${foodId}`);
+    foodRef.remove()
+    .then(() => {
+      Notify.create({ message: 'Food deleted' });
+    })
+    .catch((error) => {
+      showErrorMessage(error && error.message ? error.message : 'Food cannot be deleted');
     });
   },
 };
