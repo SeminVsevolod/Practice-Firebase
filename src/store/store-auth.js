@@ -1,6 +1,6 @@
 import { LocalStorage, Loading } from 'quasar';
 import { firebaseAuth } from 'boot/firebase';
-//import { showErrorMessage } from 'src/functions/function-show-error-message';
+import { showErrorMessage } from 'src/functions/function-show-error-message';
 
 const $state = {
   loggedIn: false,
@@ -49,8 +49,8 @@ const $actions = {
         this.$router.push('/').catch(() => {});
         dispatch('foods/fbReadData', null, { root: true });
       } else {
-        // commit('tasks/clearTask', null, { root: true });
-        // commit('tasks/setTasksDownloaded', false, { root: true });
+        commit('foods/clearFoods', null, { root: true });
+        commit('foods/setFoodsDownloaded', false, { root: true });
         commit('setLoggedIn', false);
         LocalStorage.set('loggedIn', false);
         this.$router.replace('/auth').catch(() => {});

@@ -22,30 +22,39 @@
 
   <q-page class="q-pa-lg">
   	<div class="row q-gutter-lg">
+      <template v-if="foodsDownloaded">
+        <food
+          v-for="(food, key) in foods"
+          :key="key"
+          :food="food"
+          :id="key" />
+        <button-add
+          @click="showAddFoodModal = true" />
+      </template>
 
-			<food 
-				v-for="(food, key) in foods"
-				:key="key"
-				:food="food"
-				:id="key" />
+      <template v-else>
+        <span class="absolute-center">
+          <q-spinner
+            color="primary"
+            size="3em"
+          />
+        </span>
+      </template>
 
-	    <button-add
-	    	@click="showAddFoodModal = true" />
-
-	    <q-dialog 
+	    <q-dialog
 	    	v-model="showAddFoodModal">
-        <modal-add-edit-food 
+        <modal-add-edit-food
         	@close="showAddFoodModal = false"
         	type="add" />
       </q-dialog>
-    
+
   	</div>
   </q-page>
 </template>
 
 <script>
 	import { mapGetters } from 'vuex'
-
+  import { mapState } from 'vuex';
 	export default {
 	  data() {
 	  	return {
@@ -53,7 +62,8 @@
 	  	}
 	  },
 	  computed: {
-	  	...mapGetters('foods', ['foods'])
+	  	...mapGetters('foods', ['foods']),
+      ...mapState('foods', ['foodsDownloaded'])
 	  },
 	  components: {
 	  	'food' : require('components/Foods/Food.vue').default,

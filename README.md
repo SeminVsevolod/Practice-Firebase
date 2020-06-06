@@ -26,7 +26,7 @@
 
 ✔ 12) Add the ability to write data to Firebase whenever a food item is added, updated or deleted within the app
 
-13) Ensure that multiple users can log in and log out without seeing another user's data in the app
+✔ 13) Ensure that multiple users can log in and log out without seeing another user's data in the app
 
 14) Add database rules to Firebase to ensure that each user can only read or write to their own data
 

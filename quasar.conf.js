@@ -53,8 +53,8 @@ module.exports = function (ctx) {
         'QTab',
         'QSeparator',
         'QBanner',
-        'QSpace'
-
+        'QSpace',
+        'QSpinner'
       ],
 
       directives: [
